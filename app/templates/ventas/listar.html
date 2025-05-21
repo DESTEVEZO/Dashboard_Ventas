@@ -1,0 +1,43 @@
+<!-- templates/ventas/listar.html -->
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head> 
+<div class="container">
+    <h2>Lista de Ventas</h2>
+    
+    <table class="tabla-ventas">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Productos</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for venta in ventas %}
+                <tr>
+                    <td>{{ venta.id }}</td>
+                    <td>{{ venta.fecha }}</td>
+                    <td>${{ venta.total }}</td>
+                    <td>{{ venta.estado }}</td>
+                    <td>
+                        <ul>
+                            {% for producto in venta.productos %}
+                                <li>{{ producto.nombre }} ({{ producto.cantidad }})</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="#" class="btn-accion">Ver</a> | 
+                        <a href="{{ url_for('main_bp.eliminar_venta', id=venta.id) }}" class="btn-accion eliminar" onclick="return confirm('¿Estás seguro de que deseas eliminar esta venta?');">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <a href="{{ url_for('main_bp.nueva_venta') }}" class="btn-registro">Registrar Venta</a>
+</div>

@@ -1,0 +1,38 @@
+<!-- templates/productos/listar.html -->
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<div class="container">
+    <h2 class="titulo">Lista de Productos</h2>
+
+    <table class="tabla-ventas">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Categoría</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+                <tr>
+                    <td>{{ producto.nombre }}</td>
+                    <td>{{ producto.descripcion }}</td>
+                    <td>${{ producto.precio }}</td>
+                    <td>{{ producto.stock }}</td>
+                    <td>{{ producto.categoria.nombre }}</td>
+                    <td>
+                        <a href="{{ url_for('main_bp.editar_producto', id=producto.id) }}" class="btn-accion ver">Editar</a>
+                        <a href="{{ url_for('main_bp.eliminar_producto', id=producto.id) }}" class="btn-accion eliminar" onclick="return confirm('¿Estás seguro de eliminar este producto?')">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('main_bp.nuevo_producto') }}" class="btn-registro">Agregar Producto</a>
+</div>

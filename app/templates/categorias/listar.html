@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Categorías</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2 class="titulo">Categorías</h2>
+
+        <table class="tabla-ventas">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Estado</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if categorias %}
+                    {% for cat in categorias %}
+                        <tr>
+                            <td>{{ cat.nombre }}</td>
+                            <td>{{ 'Activo' if cat.estado else 'Inactivo' }}</td>
+                            <td>{{ cat.descripcion }}</td>
+                            <td>
+                                <a href="{{ url_for('main_bp.editar_categoria', id=cat.id) }}" class="btn-accion ver">Editar</a>
+                                <a href="{{ url_for('main_bp.eliminar_categoria', id=cat.id) }}" class="btn-accion eliminar" onclick="return confirm('¿Estás seguro de que deseas eliminar esta categoría?');">Eliminar</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="4" style="text-align: center; color: #888;">No hay categorías registradas.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+
+        <a href="{{ url_for('main_bp.nueva_categoria') }}" class="btn-registro">Nueva Categoría</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!-- templates/ventas/nueva.html -->
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script>
+        // Función para mostrar/ocultar los campos de tarjeta según la selección del método de pago
+        function mostrarCamposTarjeta() {
+            const metodoPago = document.getElementById("metodo_pago").value;
+            const camposTarjeta = document.getElementById("campos_tarjeta");
+            
+            if (metodoPago === "tarjeta") {
+                camposTarjeta.style.display = "block"; // Mostrar los campos
+            } else {
+                camposTarjeta.style.display = "none"; // Ocultar los campos
+            }
+        }
+    </script>
+</head>
+
+<div class="container">
+    <h2>Registrar Venta</h2>
+    <form method="POST" class="formulario-venta">
+        {{ form.hidden_tag() }}
+        
+        <div class="form-group">
+            <label for="producto">Producto:</label>
+            {{ form.producto(class="input-field") }}
+        </div>
+        
+        <div class="form-group">
+            <label for="cantidad">Cantidad:</label>
+            {{ form.cantidad(class="input-field") }}
+        </div>
+        
+        <div class="form-group">
+            <label for="estado">Estado:</label>
+            {{ form.estado(class="input-field") }}
+        </div>
+
+        <div class="form-group">
+            <label for="metodo_pago">Método de Pago:</label>
+            {{ form.metodo_pago(class="input-field", onchange="mostrarCamposTarjeta()") }}
+        </div>
+
+        <!-- Campos para los datos de tarjeta (solo visibles si se selecciona 'tarjeta') -->
+        <div id="campos_tarjeta" style="display: none;">
+            <div class="form-group">
+                <label for="numero_tarjeta">Número de Tarjeta:</label>
+                <input type="text" name="numero_tarjeta" class="input-field" id="numero_tarjeta">
+            </div>
+
+            <div class="form-group">
+                <label for="fecha_expiracion">Fecha de Expiración:</label>
+                <input type="text" name="fecha_expiracion" class="input-field" id="fecha_expiracion" placeholder="MM/AA">
+            </div>
+
+            <div class="form-group">
+                <label for="cvv">CVV:</label>
+                <input type="text" name="cvv" class="input-field" id="cvv">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <button type="submit" class="btn-submit">Registrar Venta</button>
+        </div>
+    </form>
+</div>

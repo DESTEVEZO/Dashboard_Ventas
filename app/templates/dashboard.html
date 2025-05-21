@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Ventas</title>
+    <!-- Vincular el archivo CSS específico para el menú y dashboard -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+</head>
+
+<body>
+    <!-- Encabezado con el logo y el menú de navegación -->
+    <header class="header">
+        <div class="logo">
+            <h1>Dashboard de Ventas</h1>
+        </div>
+        <nav class="navbar">
+            <ul class="menu">
+                <li><a href="{{ url_for('main_bp.listar_categorias') }}" class="menu-item">Categorías</a></li>
+                <li><a href="{{ url_for('main_bp.listar_productos') }}" class="menu-item">Productos</a></li>
+                <li><a href="{{ url_for('main_bp.listar_ventas') }}" class="menu-item">Ventas</a></li>
+                <li><a href="#" class="menu-item">Otras secciones</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <main>
+        <div class="container">
+            <section class="content">
+                <h2>Bienvenido al Dashboard</h2>
+                <p>Desde aquí podrás gestionar todas las categorías de productos, productos, y ventas.</p>
+            </section>
+        </div>
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2025 Dashboard de Ventas</p>
+    </footer>
+</body>
+
+</html>
