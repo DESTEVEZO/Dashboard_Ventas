@@ -1,1 +1,21 @@
 version = 1
+
+# Opcional: patrones de tests y exclusiones (a nivel global)
+test_patterns = ["tests/**", "**/tests/**", "test_*.py"]
+exclude_patterns = [".venv/**", "venv/**", "__pycache__/**", "build/**", "dist/**", "migrations/**"]
+
+# Analyzers debe ser un ARREGLO de objetos → usa [[analyzers]]
+[[analyzers]]
+name = "python"
+enabled = true
+  [analyzers.meta]
+  runtime_version = "3.12"  # ajusta si usas 3.10/3.11
+
+# (Opcional) Autoformateo en PRs
+[[transformers]]
+name = "black"
+enabled = true
+
+[[transformers]]
+name = "isort"
+enabled = true
